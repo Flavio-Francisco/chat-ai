@@ -21,7 +21,7 @@ export async function POST(req: Request) {
       try {
         const buffer = Buffer.from(await file.arrayBuffer());
         const pdfData = await pdf(buffer);
-        contextoLaudo = `CONTEÚDO DO LAUDO EXTRAÍDO: ${pdfData.text}`;
+        contextoLaudo = `CONTEÚDO DO LAUDO EXTRAÍDO: ${pdfData.text.replace(/\s+/g, ' ').trim()}`;
       } catch (pdfError) {
         console.error("Erro ao ler PDF:", pdfError);
         contextoLaudo = "Erro ao processar o arquivo PDF enviado.";
